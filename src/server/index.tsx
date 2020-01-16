@@ -4,11 +4,11 @@ import * as Express from "express";
 import * as Redux from "redux";
 import { Provider as ReduxProvider } from "react-redux";
 import { StaticRouter as Router } from "react-router-dom";
-import { SheetsRegistry } from "react-jss";
 import { JssProvider } from "react-jss";
 import {
-    MuiThemeProvider,
-    createGenerateClassName
+    ThemeProvider,
+    createGenerateClassName,
+    ServerStyleSheets
 } from "@material-ui/core/styles";
 
 import App from "common/App";
@@ -25,30 +25,28 @@ function main() {
 
     express.get("/*", (req, res, next) => {
         const store = Redux.createStore(changeTitle);
-        const sheetsRegistry = new SheetsRegistry();
-        const sheetsManager = new Map();
+        const sheetsRegistry = new ServerStyleSheets();
 
         const appHTML = ReactDOM.renderToString(
-            <ReduxProvider store={store}>
-                <Router location={req.path} context={{}}>
-                    <JssProvider
-                        registry={sheetsRegistry}
-                        generateClassName={createGenerateClassName()}
-                    >
-                        <MuiThemeProvider
-                            theme={theme}
-                            sheetsManager={sheetsManager}
+            sheetsRegistry.collect(
+                <ReduxProvider store={store}>
+                    <Router location={req.path} context={{}}>
+                        <JssProvider
+                            generateClassName={createGenerateClassName()}
                         >
-                            <App />
-                        </MuiThemeProvider>
-                    </JssProvider>
-                </Router>
-            </ReduxProvider>
+                            <ThemeProvider theme={theme}>
+                                <App />
+                            </ThemeProvider>
+                        </JssProvider>
+                    </Router>
+                </ReduxProvider>
+            )
         );
         const appInitialState = JSON.stringify(store.getState()).replace(
             /</g,
             "\\u003c"
         );
+
         const appCSS = sheetsRegistry.toString();
 
         res.send(`

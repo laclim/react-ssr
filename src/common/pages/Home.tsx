@@ -1,62 +1,38 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
 
 import { Store } from "common/redux/store";
 import { changeTitle } from "common/redux/action";
+import { useEffect } from "react";
 
 interface HomeProps {
     title: string;
     updateTitle: any;
 }
 
-class Home extends React.Component<HomeProps> {
-    private titleList: string[];
+const Home = (props: HomeProps, titleList: string[]) => {
+    titleList = ["Hello World!", "High five from React", "Wow. Much skills."];
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch({ type: "CHANGE_TITLE", data: "new version" });
+    }, []);
+    // const setRandomTitle = () => {
+    //     let titleIndex = this.titleList.indexOf(props.title) + 1;
+    //     if (titleIndex >= this.titleList.length) {
+    //         titleIndex = 0;
+    //     }
 
-    constructor(props: HomeProps) {
-        super(props);
+    //     const newTitle = this.titleList[titleIndex];
+    //     props.updateTitle(newTitle);
+    // };
 
-        this.titleList = [
-            "Hello World!",
-            "High five from React",
-            "Wow. Much skills."
-        ];
-
-        this.setRandomTitle = this.setRandomTitle.bind(this);
-    }
-
-    public setRandomTitle() {
-        let titleIndex = this.titleList.indexOf(this.props.title) + 1;
-        if (titleIndex >= this.titleList.length) {
-            titleIndex = 0;
-        }
-
-        const newTitle = this.titleList[titleIndex];
-        this.props.updateTitle(newTitle);
-    }
-
-    public render() {
-        return (
-            <React.Fragment>
-                <Typography>
-                    Home page
-                </Typography>
-            </React.Fragment>
-        );
-    }
-}
-
-const mapStateToProps = (state: Store) => {
-    return {
-        title: state.title
-    };
+    const title = useSelector((state: HomeProps) => state.title);
+    return (
+        <React.Fragment>
+            <Typography>{title}</Typography>
+        </React.Fragment>
+    );
 };
 
-const mapDispatchToProps = {
-    updateTitle: changeTitle
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home);
+export default Home;

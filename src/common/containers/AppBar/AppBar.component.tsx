@@ -14,67 +14,48 @@ interface AppBarProps {
     classes: any;
 }
 
-class AppBar extends React.Component<AppBarProps> {
-    constructor(props: AppBarProps) {
-        super(props);
-    }
+const AppBar = (props: AppBarProps) => {
+    const { classes } = props;
 
-    public render() {
-        const { classes } = this.props;
-
-        return (
-            <React.Fragment>
-                <BaseAppBar position="static">
-                    <Toolbar>
-                        <Grid container className={classes.gridContainer}>
-                            <Grid
-                                item
-                                xs
-                                className={classes.menuButtonContainer}
+    return (
+        <React.Fragment>
+            <BaseAppBar position="static">
+                <Toolbar>
+                    <Grid container className={classes.gridContainer}>
+                        <Grid item xs className={classes.menuButtonContainer}>
+                            <NavLinkButton
+                                color="secondary"
+                                variant="contained"
+                                to="/"
                             >
-                                <NavLinkButton
-                                    className={classes.menuButton}
-                                    color="secondary"
-                                    variant="contained"
-                                    to="/"
-                                >
-                                    Home page
-                                </NavLinkButton>
-                            </Grid>
-                            <Grid
-                                item
-                                container
-                                xs
-                                className={classes.titleContainer}
-                            >
-                                <Typography
-                                    variant="title"
-                                    className={classes.title}
-                                >
-                                    Hello World!
-                                </Typography>
-                            </Grid>
-                            <Grid
-                                item
-                                container
-                                xs
-                                className={classes.loginButtonContainer}
-                            >
-                                <NavLinkButton
-                                    className={classes.loginButton}
-                                    color="secondary"
-                                    variant="contained"
-                                    to="/test"
-                                >
-                                    Test page
-                                </NavLinkButton>
-                            </Grid>
+                                Home page
+                            </NavLinkButton>
                         </Grid>
-                    </Toolbar>
-                </BaseAppBar>
-            </React.Fragment>
-        );
-    }
-}
+                        <Grid item container xs>
+                            <Typography variant="h6" className={classes.title}>
+                                Hello World!
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            xs
+                            className={classes.loginButtonContainer}
+                        >
+                            <NavLinkButton
+                                className={classes.loginButton}
+                                color="secondary"
+                                variant="contained"
+                                to="/test"
+                            >
+                                Test page
+                            </NavLinkButton>
+                        </Grid>
+                    </Grid>
+                </Toolbar>
+            </BaseAppBar>
+        </React.Fragment>
+    );
+};
 
 export default withStyles(style)(AppBar);
