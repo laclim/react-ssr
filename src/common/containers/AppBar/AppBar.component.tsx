@@ -14,9 +14,8 @@ interface AppBarProps {
     classes: any;
 }
 
-const AppBar = (props: AppBarProps) => {
-    const { classes } = props;
-
+const AppBar = () => {
+    const classes = style({});
     return (
         <React.Fragment>
             <BaseAppBar position="static">
@@ -48,7 +47,7 @@ const AppBar = (props: AppBarProps) => {
                                 variant="contained"
                                 to="/test"
                             >
-                                Test page
+                                Login
                             </NavLinkButton>
                         </Grid>
                     </Grid>
@@ -58,4 +57,4 @@ const AppBar = (props: AppBarProps) => {
     );
 };
 
-export default withStyles(style)(AppBar);
+export default AppBar;

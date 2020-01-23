@@ -1,6 +1,6 @@
-import { createStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
-const style = createStyles({
+const style = makeStyles({
     navLink: {
         textDecoration: "none",
         color: "unset"

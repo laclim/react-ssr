@@ -6,14 +6,13 @@ import { NavLink } from "react-router-dom";
 import style from "./NavLinkButton.style";
 
 interface NavLinkButtonProps extends Button.ButtonProps {
-    classes: any;
     children: any;
     to: string;
 }
 
 const NavLinkButton = (props: NavLinkButtonProps) => {
-    const { classes, children, to, ...others } = props;
-
+    const { children, to, ...others } = props;
+    const classes = style({});
     return (
         <React.Fragment>
             <NavLink to={to} className={classes.navLink}>
@@ -25,4 +24,4 @@ const NavLinkButton = (props: NavLinkButtonProps) => {
     );
 };
 
-export default withStyles(style)(NavLinkButton);
+export default NavLinkButton;

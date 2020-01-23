@@ -1,6 +1,6 @@
-import { createStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
-const style = createStyles({
+const style = makeStyles({
     gridContainer: {},
     menuButtonContainer: {
         justifyContent: "flex-start"
@@ -15,7 +15,10 @@ const style = createStyles({
     loginButtonContainer: {
         justifyContent: "flex-end"
     },
-    loginButton: {}
+    loginButton: {},
+    toolbar: {
+        flexWrap: "wrap"
+    }
 });
 
 export default style;
