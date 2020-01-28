@@ -17,7 +17,7 @@ const LoginButton = (props: ButtonProps) => {
 
     let history = useHistory();
     let location = useLocation();
-    let { from } = location.state || { from: { pathname: "/" } };
+    let { from } = location.state as any || { from: { pathname: "/" } };
     const dispatch = useContext(DispatchContext);
     const handleLogin = async () => {
         const response = await axios.post("http://localhost:3000/login", {

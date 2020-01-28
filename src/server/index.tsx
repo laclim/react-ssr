@@ -29,7 +29,7 @@ function main() {
         const appHTML = ReactDOM.renderToString(
             sheetsRegistry.collect(
                 <DispatchContext.Provider value={null}>
-                    <StateContext.Provider value={{}}>
+                    <StateContext.Provider value={{ userStore: { userId: "das", auth: false }, taskStore: { title: "", content: "", email: "" } }}>
                         <Router location={req.path} context={{}}>
                             <JssProvider
                                 generateClassName={createGenerateClassName()}

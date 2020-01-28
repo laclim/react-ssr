@@ -27,7 +27,7 @@ export default App;
 // const PrivateRoute = ({ component: Component, ...rest }: RouteProps) => {
 //     const state = useContext(StateContext);
 //     const { userStore } = state;
-//     // const authenticated = userStore.auth;
+//     const authenticated = userStore.auth;
 
 //     return (
 //         <Route
@@ -53,13 +53,12 @@ const UnauthenticatedRoute = ({
     ...rest
 }: RouteProps) => {
     const state = useContext(StateContext);
+
     const { userStore } = state;
 
     let authenticated: boolean;
-    useEffect(() => {
-        authenticated = userStore.auth;
-        console.log(userStore.auth);
-    }, []);
+    authenticated = userStore.auth;
+
 
     return (
         <Route
@@ -68,10 +67,10 @@ const UnauthenticatedRoute = ({
                 !authenticated ? (
                     <Component {...props} />
                 ) : (
-                    <Redirect
-                        to={{ pathname: "/", state: { from: props.location } }}
-                    />
-                )
+                        <Redirect
+                            to={{ pathname: "/", state: { from: props.location } }}
+                        />
+                    )
             }
         />
     );
